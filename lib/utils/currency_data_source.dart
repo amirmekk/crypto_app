@@ -56,6 +56,55 @@ class CurrencyDataSource extends DataGridSource {
     );
   }
 
+  Widget buildMarketCapWidget(double marketCap) {
+    return Container(
+      padding: EdgeInsets.all(16),
+      child: Text(
+        '\$$marketCap',
+        style: TextStyle(color: Colors.tealAccent),
+      ),
+    );
+  }
+
+  Widget buildNameWidget(String name) {
+    return Container(
+      padding: EdgeInsets.all(16),
+      child: Text(
+        '$name',
+      ),
+    );
+  }
+
+  Widget buildOneDChangeWidget(double oneDayChange) {
+    return Container(
+      padding: EdgeInsets.all(16),
+      child: Text(
+        oneDayChange > 0 ? '$oneDayChange% ↑' : '$oneDayChange% ↓',
+        style: TextStyle(color: oneDayChange > 0 ? Colors.green : Colors.red),
+      ),
+    );
+  }
+
+  Widget buildOneHChangeWidget(double oneHourChange) {
+    return Container(
+      padding: EdgeInsets.all(16),
+      child: Text(
+        oneHourChange > 0 ? '$oneHourChange% ↑' : '$oneHourChange% ↓',
+        style: TextStyle(color: oneHourChange > 0 ? Colors.green : Colors.red),
+      ),
+    );
+  }
+
+  Widget buildRankWidget(int rank) {
+    return Container(
+      padding: EdgeInsets.all(16),
+      child: Text(
+        '$rank',
+        //style: TextStyle(color: Colors.),
+      ),
+    );
+  }
+
   @override
   DataGridRowAdapter? buildRow(DataGridRow row) {
     return DataGridRowAdapter(
@@ -77,6 +126,18 @@ class CurrencyDataSource extends DataGridSource {
           );
         case CurrencyColumn.price:
           return buildPriceWidget(currency.price);
+
+        case CurrencyColumn.marketCap:
+          return buildMarketCapWidget(currency.marketCap);
+
+        case CurrencyColumn.oneDChange:
+          return buildOneDChangeWidget(currency.oneDayChange);
+        case CurrencyColumn.name:
+          return buildNameWidget(currency.name);
+        case CurrencyColumn.oneHChange:
+          return buildOneHChangeWidget(currency.oneHourChange);
+        case CurrencyColumn.rank:
+          return buildRankWidget(currency.rank);
         default:
           return Text('hello');
       }
