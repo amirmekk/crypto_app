@@ -18,9 +18,9 @@ class CurrencyDataSource extends DataGridSource {
         (currency) => DataGridRow(
           cells: CurrencyColumn.values
               .map(
-                (column) => DataGridCell<Currency>(
+                (column) => DataGridCell<CurrencyComparable>(
                   columnName: column.toString(),
-                  value: currency,
+                  value: CurrencyComparable(column, currency),
                 ),
               )
               .toList(),
@@ -109,7 +109,8 @@ class CurrencyDataSource extends DataGridSource {
   DataGridRowAdapter? buildRow(DataGridRow row) {
     return DataGridRowAdapter(
         cells: row.getCells().map<Widget>((dataGridCell) {
-      final Currency currency = dataGridCell.value;
+      final CurrencyComparable currencyWrapper = dataGridCell.value;
+      final currency = currencyWrapper.currency;
       final column = CurrencyColumn.values
           .firstWhere((value) => value.toString() == dataGridCell.columnName);
       switch (column) {

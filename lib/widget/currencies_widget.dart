@@ -15,6 +15,7 @@ class CurrenciesWidget extends StatelessWidget {
       );
     } else {
       return SfDataGrid(
+        allowSorting: true,
         source: currencyDataSource,
         columns: buildGridColumns(),
       );
