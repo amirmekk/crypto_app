@@ -16,6 +16,8 @@ class CurrenciesWidget extends StatelessWidget {
     } else {
       return SfDataGrid(
         allowSorting: true,
+        defaultColumnWidth: 150,
+        frozenColumnsCount: 1,
         source: currencyDataSource,
         columns: buildGridColumns(),
       );
